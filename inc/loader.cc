@@ -262,6 +262,7 @@ static int load_sections_bfd(bfd *bfd_h, Binary *bin) {
 		sec->type = sectype;
 		sec->vma = vma;
 		sec->bytes = (uint8_t *)malloc(size);
+		sec->size = size;
 		if(!sec->bytes) { 
 			fprintf(stderr, "out of memory\n");
 			return -1;
