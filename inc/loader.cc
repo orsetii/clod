@@ -106,7 +106,7 @@ static int load_binary_bfd(std::string &fname, Binary *bin, Binary::BinaryType t
 	load_symbols_bfd(bfd_h, bin);
 	load_dynsym_bfd(bfd_h, bin);
 
-	if(load_symbols_bfd(bfd_h, bin) < 0) goto fail;
+	if(load_sections_bfd(bfd_h, bin) < 0) goto fail;
 
 	ret = 0;
 	goto cleanup;

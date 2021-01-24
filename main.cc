@@ -25,12 +25,24 @@ int main(int argc, char* argv[]) {
 
 	printf("loaded binary '%s' %s%s (%u bits) entry@0%016jx\n", bin.filename.c_str(), bin.type_str.c_str(), bin.arch_str.c_str(), bin.bits, bin.entry);
 
+	printf("Sections: %lu\n", bin.sections.size());
 	for (i = 0; i < bin.sections.size(); i++) {
-
 		sec = &bin.sections[i];
-
 		printf("  0x%016jx %-8ju %-20s %s\n", sec->vma, sec->size, sec->name.c_str(), sec->type == Section::SEC_TYPE_CODE ? "CODE" : "DATA");
 	}
+
+
+
+	if(bin.symbols.size() > 0) {
+		for (i = 0; i < bin.symbols.size(); i++) {
+
+			sym = &bin.symbols[i];
+
+			printf("  %-40s 0x%016jx %s\n", sym->name.c_str(), sym->addr, (sym->type & Symbol::SYM_TYPE_FUNC) ? "FUNC" : "");
+		}
+	}
+
+
 
 
 
