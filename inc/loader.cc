@@ -155,14 +155,6 @@ static int load_symbols_bfd(bfd *bfd_h, Binary *bin) {
 		}
 
 		for(i = 0; i < nsyms; i++) {
-			if(bfd_symtab[i]->flags & BSF_FUNCTION) {
-
-				bin->symbols.push_back(Symbol());
-				sym = &bin->symbols.back();
-				sym->type = Symbol::SYM_TYPE_FUNC;
-				sym->name = std::string(bfd_symtab[i]->name);
-				sym->addr = bfd_asymbol_value(bfd_symtab[i]);
-			}
 			if(bfd_symtab[i]->flags & BSF_WEAK) {
 				for (int j = 0; j < bin->symbols.size(); j++) {
 					if (bin->symbols[j].name.c_str() == bfd_symtab[i]->name) {
@@ -173,6 +165,13 @@ static int load_symbols_bfd(bfd *bfd_h, Binary *bin) {
 						break;
 					}
 				}
+			} else if(bfd_symtab[i]->flags & BSF_FUNCTION) {
+
+				bin->symbols.push_back(Symbol());
+				sym = &bin->symbols.back();
+				sym->type = Symbol::SYM_TYPE_FUNC;
+				sym->name = std::string(bfd_symtab[i]->name);
+				sym->addr = bfd_asymbol_value(bfd_symtab[i]);
 			}
 		}
 	}
