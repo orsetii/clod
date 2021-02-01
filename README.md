@@ -5,3 +5,5 @@ This binary makes use of Binary File Descriptor library `libbfd` which provides 
 The BFD library is part of the GNU project in the `binutils` and is included in the `binutils-dev` package.
 
 You can find the core `libbfd` API in `/usr/include/bfd.h`.
+
+Linear Disassembly is being added.
